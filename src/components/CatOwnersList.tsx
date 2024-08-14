@@ -49,27 +49,37 @@ const CatOwnersList = () => {
   });
 
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading data</div>;
+  if (isLoading) return <div className="fixed top-0 left-0 right-0 bottom-0 bg-slate-950 flex items-center justify-center font-mono text-white">
+                  Loading...
+                </div>
+
+  if (error) return <div className="fixed top-0 left-0 right-0 bottom-0 bg-slate-950 flex items-center justify-center font-mono text-white">
+                  Loading...
+                </div>
+
 
   return (
-    <div className="p-4 bg-slate-900 font-mono">
-      <h1 className="text-2xl font-bold mb-4">Cat Owner List</h1>
+    <div className="items-center p-4 bg-slate-950 font-mono">
+      <div className="flex justify-center ">
+        <h1 className="text-4xl items-center font-bold text-gray-400 mb-4">😻</h1>
+        <div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800">+99</div>
+      </div>
 
       <InfiniteScroll
         dataLength={paginatedData?.pages.flatMap(page => page.data).length || 0}
         next={fetchNextPage}
         hasMore={hasNextPage}
-        loader={<h4>Loading more...</h4>}
+        loader={<h4 className='m-auto p-5 text-center text-slate-200 text-2xl p-10 w-full bg-slate-500 rounded-lg'>Loading more cat lovers...</h4>}
         endMessage={<p>No more data</p>}
       >
         <ul className="space-y-4">
           {paginatedData?.pages.flatMap(page => page.data).map((owner, index) => (
-            <li key={index} className="flex items-center space-x-4 border p-4 rounded-lg shadow">
-              <img src={owner.ownerPicture} alt="Owner" className="w-16 h-16 rounded-full" />
+            <li key={index} 
+                className="flex items-center m-auto space-x-4 w-3/5 border-2 border-neutral-900 p-4 rounded-lg shadow bg-slate-800 hover:bg-gray-900">
+              <img src={owner.ownerPicture} alt="Owner" className="w-16 h-16 border-2  border-neutral-800 rounded-3xl " />
               <div>
-                <p className="text-xl font-semibold">{owner.ownerName}</p>
-                <p className="text-gray-600">{owner.catFact}</p>
+                <p className="text-xl font-semibold text-slate-400">{owner.ownerName}</p>
+                <p className="text-slate-500 font-light">{owner.catFact}</p>
               </div>
             </li>
           ))}
